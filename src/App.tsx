@@ -7,6 +7,10 @@ import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Machines from "./pages/Machines";
 import Maintenance from "./pages/Maintenance";
+import Parts from "./pages/Parts";
+import WorkOrders from "./pages/WorkOrders";
+import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,10 +26,10 @@ const App = () => (
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/machines" element={<Machines />} />
           <Route path="/maintenance" element={<Maintenance />} />
-          <Route path="/parts" element={<Dashboard />} />
-          <Route path="/work-orders" element={<Dashboard />} />
-          <Route path="/reports" element={<Dashboard />} />
-          <Route path="/settings" element={<Dashboard />} />
+          <Route path="/parts" element={<Parts />} />
+          <Route path="/work-orders" element={<WorkOrders />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

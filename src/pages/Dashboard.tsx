@@ -1,7 +1,11 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { MetricCard } from "@/components/cards/MetricCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { NewMachineModal } from "@/components/modals/NewMachineModal";
+import { NewPartModal } from "@/components/modals/NewPartModal";
+import { NewMaintenanceModal } from "@/components/modals/NewMaintenanceModal";
 import { 
   Cog, 
   Wrench, 
@@ -115,6 +119,10 @@ const getPriorityColor = (priority: string) => {
 };
 
 export default function Dashboard() {
+  const [showMachineModal, setShowMachineModal] = useState(false);
+  const [showPartModal, setShowPartModal] = useState(false);
+  const [showMaintenanceModal, setShowMaintenanceModal] = useState(false);
+
   return (
     <Layout>
       <div className="space-y-6">
@@ -126,7 +134,7 @@ export default function Dashboard() {
               Visão geral da manutenção industrial
             </p>
           </div>
-          <Button variant="hero">
+          <Button variant="hero" onClick={() => setShowMaintenanceModal(true)}>
             <Calendar className="w-4 h-4" />
             Agendar Manutenção
           </Button>
@@ -222,15 +230,15 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <Button variant="outline" className="h-20 flex-col gap-2">
+              <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => setShowMachineModal(true)}>
                 <Cog className="w-6 h-6" />
                 Nova Máquina
               </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
+              <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => setShowMaintenanceModal(true)}>
                 <Wrench className="w-6 h-6" />
                 Agendar Manutenção
               </Button>
-              <Button variant="outline" className="h-20 flex-col gap-2">
+              <Button variant="outline" className="h-20 flex-col gap-2" onClick={() => setShowPartModal(true)}>
                 <Package className="w-6 h-6" />
                 Gerenciar Peças
               </Button>
@@ -242,6 +250,11 @@ export default function Dashboard() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Modals */}
+      <NewMachineModal open={showMachineModal} onOpenChange={setShowMachineModal} />
+      <NewPartModal open={showPartModal} onOpenChange={setShowPartModal} />
+      <NewMaintenanceModal open={showMaintenanceModal} onOpenChange={setShowMaintenanceModal} />
     </Layout>
   );
 }

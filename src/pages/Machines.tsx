@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { Layout } from "@/components/layout/Layout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { NewMachineModal } from "@/components/modals/NewMachineModal";
 import { 
   Plus, 
   Search, 
@@ -71,6 +73,8 @@ const getStatusBadge = (status: string) => {
 };
 
 export default function Machines() {
+  const [showMachineModal, setShowMachineModal] = useState(false);
+
   return (
     <Layout>
       <div className="space-y-6">
@@ -82,7 +86,7 @@ export default function Machines() {
               Cadastre e gerencie todas as máquinas industriais
             </p>
           </div>
-          <Button variant="hero">
+          <Button variant="hero" onClick={() => setShowMachineModal(true)}>
             <Plus className="w-4 h-4" />
             Nova Máquina
           </Button>
@@ -176,12 +180,14 @@ export default function Machines() {
             <p className="text-muted-foreground mb-4">
               Clique aqui para cadastrar uma nova máquina no sistema
             </p>
-            <Button variant="hero">
+            <Button variant="hero" onClick={() => setShowMachineModal(true)}>
               Cadastrar Máquina
             </Button>
           </CardContent>
         </Card>
       </div>
+
+      <NewMachineModal open={showMachineModal} onOpenChange={setShowMachineModal} />
     </Layout>
   );
 }
