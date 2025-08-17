@@ -6,7 +6,9 @@ import {
   Package, 
   FileText, 
   BarChart3,
-  Cog
+  Cog,
+  ClipboardList,
+  Users
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import maintenanceIcon from "@/assets/maintenance-icon.jpg";
@@ -14,9 +16,9 @@ import maintenanceIcon from "@/assets/maintenance-icon.jpg";
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Máquinas", href: "/machines", icon: Cog },
-  { name: "Manutenção", href: "/maintenance", icon: Wrench },
   { name: "Peças", href: "/parts", icon: Package },
-  { name: "Ordens de Serviço", href: "/work-orders", icon: FileText },
+  { name: "Ordens de Serviço", href: "/work-orders", icon: ClipboardList },
+  { name: "Funcionários", href: "/employees", icon: Users },
   { name: "Relatórios", href: "/reports", icon: BarChart3 },
   { name: "Configurações", href: "/settings", icon: Settings },
 ];

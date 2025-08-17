@@ -151,11 +151,13 @@ export default function Parts() {
             <p className="text-muted-foreground mb-4">
               Cadastre uma nova peça no estoque
             </p>
-            <Button variant="hero">
+            <Button variant="hero" onClick={() => setShowPartModal(true)}>
               Cadastrar Peça
             </Button>
           </CardContent>
         </Card>
+
+        <NewPartModal open={showPartModal} onOpenChange={setShowPartModal} />
       </div>
     </Layout>
   );

@@ -1,4 +1,4 @@
-import { Machine, Part, WorkOrder, MaintenanceSchedule } from "@/types";
+import { Machine, Part, WorkOrder, MaintenanceSchedule, Employee } from "@/types";
 
 export const mockMachines: Machine[] = [
   {
@@ -194,4 +194,88 @@ export const mockCategories = [
   "Válvulas",
   "Componentes Elétricos",
   "Ferramentas"
+];
+
+export const mockDepartments = ["Manutenção", "Produção", "Qualidade", "Engenharia", "Administrativo", "Segurança do Trabalho"];
+export const mockPositions = ["Técnico de Manutenção", "Operador de Máquina", "Supervisor", "Engenheiro", "Auxiliar", "Coordenador"];
+
+export const mockEmployees: Employee[] = [
+  {
+    id: 1,
+    name: "Carlos Silva",
+    birthDate: "1985-03-15",
+    department: "Manutenção",
+    position: "Técnico de Manutenção",
+    phone: "(11) 98765-4321",
+    cpf: "12345678901",
+    nif: "123456789",
+    email: "carlos.silva@empresa.com",
+    status: "Ativo",
+    hireDate: "15/01/2020",
+  },
+  {
+    id: 2,
+    name: "Ana Santos",
+    birthDate: "1990-07-22",
+    department: "Manutenção",
+    position: "Técnico de Manutenção",
+    phone: "(11) 98765-4322",
+    cpf: "12345678902",
+    nif: "123456790",
+    email: "ana.santos@empresa.com",
+    status: "Ativo",
+    hireDate: "10/05/2019",
+  },
+  {
+    id: 3,
+    name: "Pedro Oliveira",
+    birthDate: "1982-11-08",
+    department: "Manutenção",
+    position: "Supervisor",
+    phone: "(11) 98765-4323",
+    cpf: "12345678903",
+    nif: "123456791",
+    email: "pedro.oliveira@empresa.com",
+    status: "Ativo",
+    hireDate: "20/03/2018",
+  },
+  {
+    id: 4,
+    name: "Maria Costa",
+    birthDate: "1988-05-12",
+    department: "Produção",
+    position: "Operador de Máquina",
+    phone: "(11) 98765-4324",
+    cpf: "12345678904",
+    nif: "123456792",
+    email: "maria.costa@empresa.com",
+    status: "Férias",
+    hireDate: "05/08/2021",
+  },
+  {
+    id: 5,
+    name: "João Ferreira",
+    birthDate: "1975-12-03",
+    department: "Engenharia",
+    position: "Engenheiro",
+    phone: "(11) 98765-4325",
+    cpf: "12345678905",
+    nif: "123456793",
+    email: "joao.ferreira@empresa.com",
+    status: "Ativo",
+    hireDate: "12/11/2017",
+  },
+  {
+    id: 6,
+    name: "Lucia Fernandes",
+    birthDate: "1992-09-18",
+    department: "Qualidade",
+    position: "Técnico de Qualidade",
+    phone: "(11) 98765-4326",
+    cpf: "12345678906",
+    nif: "123456794",
+    email: "lucia.fernandes@empresa.com",
+    status: "Ativo",
+    hireDate: "14/02/2022",
+  },
 ];

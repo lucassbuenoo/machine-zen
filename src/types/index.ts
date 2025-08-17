@@ -51,6 +51,21 @@ export interface MaintenanceSchedule {
   completedDate?: string;
 }
 
+export interface Employee {
+  id: number;
+  name: string;
+  birthDate: string;
+  department: string;
+  position: string;
+  phone: string;
+  cpf: string;
+  nif: string;
+  photo?: string;
+  status: EmployeeStatus;
+  hireDate: string;
+  email?: string;
+}
+
 export interface Report {
   id: number;
   title: string;
@@ -70,6 +85,7 @@ export type Priority = "Baixa" | "Média" | "Alta" | "Crítica";
 export type WorkOrderStatus = "Aberta" | "Em Andamento" | "Concluída" | "Cancelada";
 export type MaintenanceType = "Preventiva" | "Corretiva" | "Preditiva";
 export type MaintenanceStatus = "Agendada" | "Em Andamento" | "Concluída" | "Cancelada";
+export type EmployeeStatus = "Ativo" | "Inativo" | "Férias" | "Licença";
 export type ReportType = "maintenance" | "costs" | "parts" | "downtime";
 
 export interface NewMachineForm {
@@ -99,10 +115,13 @@ export interface NewWorkOrderForm {
   assignedTechnician: string;
 }
 
-export interface NewMaintenanceForm {
-  machineId: number;
-  type: MaintenanceType;
-  scheduledDate: string;
-  assignedTechnician: string;
-  notes: string;
+export interface NewEmployeeForm {
+  name: string;
+  birthDate: string;
+  department: string;
+  position: string;
+  phone: string;
+  cpf: string;
+  nif: string;
+  email: string;
 }

@@ -19,6 +19,8 @@ import {
 } from "lucide-react";
 
 export default function WorkOrders() {
+  const [showWorkOrderModal, setShowWorkOrderModal] = useState(false);
+
   return (
     <Layout>
       <div className="space-y-6">
@@ -30,7 +32,7 @@ export default function WorkOrders() {
               Gerencie e acompanhe todas as ordens de manutenção
             </p>
           </div>
-          <Button variant="hero">
+          <Button variant="hero" onClick={() => setShowWorkOrderModal(true)}>
             <Plus className="w-4 h-4" />
             Nova Ordem
           </Button>
@@ -157,11 +159,13 @@ export default function WorkOrders() {
             <p className="text-muted-foreground mb-4">
               Registre uma nova solicitação de manutenção
             </p>
-            <Button variant="hero">
+            <Button variant="hero" onClick={() => setShowWorkOrderModal(true)}>
               Criar Ordem
             </Button>
           </CardContent>
         </Card>
+
+        <NewWorkOrderModal open={showWorkOrderModal} onOpenChange={setShowWorkOrderModal} />
       </div>
     </Layout>
   );
