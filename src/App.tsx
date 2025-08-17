@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Machines from "./pages/Machines";
+import Sensors from "./pages/Sensors";
 import Parts from "./pages/Parts";
 import WorkOrders from "./pages/WorkOrders";
 import Employees from "./pages/Employees";
@@ -22,14 +23,15 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Landing />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/machines" element={<Machines />} />
-          <Route path="/parts" element={<Parts />} />
-          <Route path="/work-orders" element={<WorkOrders />} />
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/reports" element={<Reports />} />
-          <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<Landing />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/machines" element={<Machines />} />
+            <Route path="/sensors" element={<Sensors />} />
+            <Route path="/parts" element={<Parts />} />
+            <Route path="/work-orders" element={<WorkOrders />} />
+            <Route path="/employees" element={<Employees />} />
+            <Route path="/reports" element={<Reports />} />
+            <Route path="/settings" element={<Settings />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 interface StatusBadgeProps {
   status: string;
-  type?: "machine" | "part" | "workOrder" | "maintenance" | "employee";
+  type?: "machine" | "part" | "workOrder" | "maintenance" | "employee" | "sensor";
   className?: string;
 }
 
@@ -67,13 +67,27 @@ export function StatusBadge({ status, type = "machine", className }: StatusBadge
       case "employee":
         switch (status) {
           case "Ativo":
-            return "bg-success text-success-foreground";
+            return "bg-green-500 text-white";
           case "Inativo":
             return "bg-destructive text-destructive-foreground";
           case "Férias":
             return "bg-blue-500 text-white";
           case "Licença":
-            return "bg-warning text-warning-foreground";
+            return "bg-yellow-500 text-white";
+          default:
+            return "bg-secondary text-secondary-foreground";
+        }
+      
+      case "sensor":
+        switch (status) {
+          case "Ativo":
+            return "bg-green-500 text-white";
+          case "Inativo":
+            return "bg-gray-500 text-white";
+          case "Alerta":
+            return "bg-yellow-500 text-white";
+          case "Falha":
+            return "bg-red-500 text-white";
           default:
             return "bg-secondary text-secondary-foreground";
         }

@@ -16,6 +16,7 @@ import maintenanceIcon from "@/assets/maintenance-icon.jpg";
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
   { name: "Máquinas", href: "/machines", icon: Cog },
+  { name: "Sensores", href: "/sensors", icon: Wrench },
   { name: "Peças", href: "/parts", icon: Package },
   { name: "Ordens de Serviço", href: "/work-orders", icon: ClipboardList },
   { name: "Funcionários", href: "/employees", icon: Users },

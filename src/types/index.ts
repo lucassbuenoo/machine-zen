@@ -87,6 +87,8 @@ export type MaintenanceType = "Preventiva" | "Corretiva" | "Preditiva";
 export type MaintenanceStatus = "Agendada" | "Em Andamento" | "Concluída" | "Cancelada";
 export type EmployeeStatus = "Ativo" | "Inativo" | "Férias" | "Licença";
 export type ReportType = "maintenance" | "costs" | "parts" | "downtime";
+export type SensorType = "Temperatura" | "Pressão" | "Vibração" | "Nível" | "Vazão" | "Velocidade";
+export type SensorStatus = "Ativo" | "Inativo" | "Alerta" | "Falha";
 
 export interface NewMachineForm {
   name: string;
@@ -115,6 +117,22 @@ export interface NewWorkOrderForm {
   assignedTechnician: string;
 }
 
+export interface Sensor {
+  id: number;
+  name: string;
+  type: SensorType;
+  machineId: number;
+  machineName: string;
+  status: SensorStatus;
+  location: string;
+  value: number;
+  unit: string;
+  minThreshold?: number;
+  maxThreshold?: number;
+  lastReading: string;
+  description?: string;
+}
+
 export interface NewEmployeeForm {
   name: string;
   birthDate: string;
@@ -124,4 +142,14 @@ export interface NewEmployeeForm {
   cpf: string;
   nif: string;
   email: string;
+}
+
+export interface NewSensorForm {
+  name: string;
+  type: SensorType;
+  machineId: number;
+  location: string;
+  minThreshold?: number;
+  maxThreshold?: number;
+  description: string;
 }

@@ -223,6 +223,133 @@ export default function Dashboard() {
           </div>
         </div>
 
+        {/* Sensor Monitoring */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold text-foreground">Monitoramento em Tempo Real</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {/* Temperature Card */}
+            <Card className="bg-gradient-to-br from-orange-500/10 to-red-500/10 border-orange-200/20">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">Temperatura Média</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-3xl font-bold text-foreground">68°C</p>
+                      <span className="text-xs px-2 py-1 bg-green-500 text-white rounded-full">Normal</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">3 sensores ativos</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-orange-500/10 text-orange-600">
+                    <AlertTriangle className="w-6 h-6" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Pressure Card */}
+            <Card className="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 border-blue-200/20">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">Pressão Hidráulica</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-3xl font-bold text-foreground">185 bar</p>
+                      <span className="text-xs px-2 py-1 bg-yellow-500 text-white rounded-full">Alerta</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">1 sensor ativo</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-blue-500/10 text-blue-600">
+                    <TrendingUp className="w-6 h-6" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Vibration Card */}
+            <Card className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 border-purple-200/20">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">Vibração Média</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-3xl font-bold text-foreground">2.5 mm/s</p>
+                      <span className="text-xs px-2 py-1 bg-green-500 text-white rounded-full">Normal</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">1 sensor ativo</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-purple-500/10 text-purple-600">
+                    <CheckCircle className="w-6 h-6" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Fluid Levels Card */}
+            <Card className="bg-gradient-to-br from-green-500/10 to-emerald-500/10 border-green-200/20">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-muted-foreground">Níveis de Fluidos</p>
+                    <div className="flex items-baseline gap-2">
+                      <p className="text-3xl font-bold text-foreground">85%</p>
+                      <span className="text-xs px-2 py-1 bg-green-500 text-white rounded-full">Bom</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">2 sensores ativos</p>
+                  </div>
+                  <div className="p-3 rounded-xl bg-green-500/10 text-green-600">
+                    <Package className="w-6 h-6" />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sensor Alerts */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <AlertTriangle className="w-5 h-5" />
+                Alertas dos Sensores
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-yellow-500/10 text-yellow-600">
+                      <AlertTriangle className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">Sensor Pressão Hidráulica</p>
+                      <p className="text-sm text-muted-foreground">Prensa Hidráulica HID-205 - Sistema Hidráulico</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs px-2 py-1 bg-yellow-500 text-white rounded-full">185 bar</span>
+                    <p className="text-xs text-muted-foreground mt-1">15/01/2024 14:28</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-full bg-red-500/10 text-red-600">
+                      <AlertTriangle className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <p className="font-medium text-foreground">Sensor Nível Água</p>
+                      <p className="text-sm text-muted-foreground">Fresadora Universal FRE-304 - Sistema Refrigeração</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-xs px-2 py-1 bg-red-500 text-white rounded-full">0%</span>
+                    <p className="text-xs text-muted-foreground mt-1">15/01/2024 12:15</p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Quick Actions */}
         <Card className="shadow-card">
           <CardHeader>

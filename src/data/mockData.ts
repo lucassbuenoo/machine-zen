@@ -1,4 +1,4 @@
-import { Machine, Part, WorkOrder, MaintenanceSchedule, Employee } from "@/types";
+import { Machine, Part, WorkOrder, MaintenanceSchedule, Employee, Sensor } from "@/types";
 
 export const mockMachines: Machine[] = [
   {
@@ -278,4 +278,97 @@ export const mockEmployees: Employee[] = [
     status: "Ativo",
     hireDate: "14/02/2022",
   },
+];
+
+export const mockSensors: Sensor[] = [
+  {
+    id: 1,
+    name: "Sensor Temperatura Motor",
+    type: "Temperatura",
+    machineId: 1,
+    machineName: "Torno CNC-001",
+    status: "Ativo",
+    location: "Motor Principal",
+    value: 68,
+    unit: "°C",
+    minThreshold: 20,
+    maxThreshold: 80,
+    lastReading: "15/01/2024 14:30",
+    description: "Monitor de temperatura do motor principal"
+  },
+  {
+    id: 2,
+    name: "Sensor Pressão Hidráulica",
+    type: "Pressão",
+    machineId: 2,
+    machineName: "Prensa Hidráulica HID-205",
+    status: "Alerta",
+    location: "Sistema Hidráulico",
+    value: 185,
+    unit: "bar",
+    minThreshold: 50,
+    maxThreshold: 200,
+    lastReading: "15/01/2024 14:28",
+    description: "Monitor de pressão do sistema hidráulico"
+  },
+  {
+    id: 3,
+    name: "Sensor Vibração Eixo",
+    type: "Vibração",
+    machineId: 1,
+    machineName: "Torno CNC-001",
+    status: "Ativo",
+    location: "Eixo Principal",
+    value: 2.5,
+    unit: "mm/s",
+    minThreshold: 0,
+    maxThreshold: 5,
+    lastReading: "15/01/2024 14:32",
+    description: "Monitor de vibração do eixo principal"
+  },
+  {
+    id: 4,
+    name: "Sensor Nível Óleo",
+    type: "Nível",
+    machineId: 3,
+    machineName: "Solda MIG-102",
+    status: "Ativo",
+    location: "Reservatório",
+    value: 85,
+    unit: "%",
+    minThreshold: 20,
+    maxThreshold: 100,
+    lastReading: "15/01/2024 14:25",
+    description: "Monitor de nível de óleo lubrificante"
+  },
+  {
+    id: 5,
+    name: "Sensor Nível Água",
+    type: "Nível",
+    machineId: 4,
+    machineName: "Fresadora Universal FRE-304",
+    status: "Falha",
+    location: "Sistema Refrigeração",
+    value: 0,
+    unit: "%",
+    minThreshold: 30,
+    maxThreshold: 100,
+    lastReading: "15/01/2024 12:15",
+    description: "Monitor de nível de água do sistema de refrigeração"
+  },
+  {
+    id: 6,
+    name: "Sensor Velocidade Motor",
+    type: "Velocidade",
+    machineId: 1,
+    machineName: "Torno CNC-001",
+    status: "Ativo",
+    location: "Motor Principal",
+    value: 1800,
+    unit: "RPM",
+    minThreshold: 500,
+    maxThreshold: 3000,
+    lastReading: "15/01/2024 14:30",
+    description: "Monitor de velocidade do motor principal"
+  }
 ];
