@@ -11,7 +11,7 @@ import {
   Users
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import maintenanceIcon from "@/assets/maintenance-icon.jpg";
+import sgmiLogo from "@/assets/sgmi_logo.png";
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
@@ -32,12 +32,12 @@ export function Sidebar() {
       {/* Logo */}
       <div className="flex items-center gap-3 p-6 border-b border-border">
         <img 
-          src={maintenanceIcon} 
-          alt="MaintenancePro" 
-          className="w-10 h-10 rounded-lg"
+          src={sgmiLogo} 
+          alt="SGMI" 
+          className="w-12 h-12 object-contain"
         />
         <div>
-          <h1 className="text-xl font-bold text-foreground">MaintenancePro</h1>
+          <h1 className="text-xl font-bold text-foreground">SGMI</h1>
           <p className="text-sm text-muted-foreground">Gestão Industrial</p>
         </div>
       </div>
