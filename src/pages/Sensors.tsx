@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { NewSensorModal } from "@/components/modals/NewSensorModal";
+import { Layout } from "@/components/layout/Layout";
 import { mockSensors } from "@/data/mockData";
 import { Sensor, SensorType, SensorStatus } from "@/types";
 import { Plus, Search, Thermometer, Gauge, Activity, Droplets, Zap, RotateCcw, AlertTriangle } from "lucide-react";
@@ -59,18 +60,19 @@ export default function Sensors() {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Sensores</h1>
-          <p className="text-muted-foreground">Gerencie e monitore sensores das máquinas</p>
+    <Layout>
+      <div className="space-y-6">
+        {/* Header */}
+        <div className="flex justify-between items-center">
+          <div>
+            <h1 className="text-3xl font-bold text-foreground">Sensores</h1>
+            <p className="text-muted-foreground">Gerencie e monitore sensores das máquinas</p>
+          </div>
+          <Button onClick={() => setIsNewSensorModalOpen(true)}>
+            <Plus className="w-4 h-4 mr-2" />
+            Novo Sensor
+          </Button>
         </div>
-        <Button onClick={() => setIsNewSensorModalOpen(true)}>
-          <Plus className="w-4 h-4 mr-2" />
-          Novo Sensor
-        </Button>
-      </div>
 
       {/* Metrics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
@@ -258,11 +260,12 @@ export default function Sensors() {
         </Card>
       )}
 
-      <NewSensorModal
-        open={isNewSensorModalOpen}
-        onOpenChange={setIsNewSensorModalOpen}
-        onSensorCreated={handleNewSensor}
-      />
-    </div>
+        <NewSensorModal
+          open={isNewSensorModalOpen}
+          onOpenChange={setIsNewSensorModalOpen}
+          onSensorCreated={handleNewSensor}
+        />
+      </div>
+    </Layout>
   );
 }
