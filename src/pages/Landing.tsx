@@ -53,10 +53,10 @@ export default function Landing() {
             <span className="text-xl font-bold text-foreground">SGMI</span>
           </div>
           <div className="flex items-center gap-4">
-            <Link to="/dashboard">
+            <Link to="/auth">
               <Button variant="outline">Entrar</Button>
             </Link>
-            <Link to="/dashboard">
+            <Link to="/auth">
               <Button variant="hero" size="lg">
                 Começar Grátis
                 <ArrowRight className="w-4 h-4" />
@@ -85,7 +85,7 @@ export default function Landing() {
             gestão de peças, funcionários e relatórios avançados para sua indústria.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/dashboard">
+            <Link to="/auth">
               <Button variant="hero" size="lg" className="text-lg px-8 py-4">
                 Acessar Sistema
                 <ArrowRight className="w-5 h-5" />
@@ -274,7 +274,7 @@ export default function Landing() {
           <p className="text-xl mb-8 text-white/90">
             Comece hoje mesmo e veja os resultados na primeira semana
           </p>
-          <Link to="/dashboard">
+          <Link to="/auth">
             <Button variant="hero" size="lg" className="bg-accent hover:bg-accent/90 text-lg px-8 py-4">
               Acessar Sistema Agora
               <ArrowRight className="w-5 h-5" />

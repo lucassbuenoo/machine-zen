@@ -4,7 +4,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./pages/Landing";
+import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Machines from "./pages/Machines";
 import Sensors from "./pages/Sensors";
 import Parts from "./pages/Parts";
@@ -24,14 +26,15 @@ const App = () => (
       <BrowserRouter>
         <Routes>
             <Route path="/" element={<Landing />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/machines" element={<Machines />} />
-            <Route path="/sensors" element={<Sensors />} />
-            <Route path="/parts" element={<Parts />} />
-            <Route path="/work-orders" element={<WorkOrders />} />
-            <Route path="/employees" element={<Employees />} />
-            <Route path="/reports" element={<Reports />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/machines" element={<ProtectedRoute><Machines /></ProtectedRoute>} />
+            <Route path="/sensors" element={<ProtectedRoute><Sensors /></ProtectedRoute>} />
+            <Route path="/parts" element={<ProtectedRoute><Parts /></ProtectedRoute>} />
+            <Route path="/work-orders" element={<ProtectedRoute><WorkOrders /></ProtectedRoute>} />
+            <Route path="/employees" element={<ProtectedRoute><Employees /></ProtectedRoute>} />
+            <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
