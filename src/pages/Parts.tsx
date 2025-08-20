@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { NewPartModal } from "@/components/modals/NewPartModal";
-import { mockParts } from "@/data/mockData";
+import { EditPartModal } from "@/components/modals/EditPartModal";
+import { useParts } from "@/hooks/useParts";
+import { Skeleton } from "@/components/ui/skeleton";
 import { 
   Plus, 
   Search, 
@@ -20,17 +22,35 @@ import {
 
 export default function Parts() {
   const [showPartModal, setShowPartModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedPart, setSelectedPart] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  const { parts, loading, createPart, updatePart, deletePart } = useParts();
+  
+  const filteredParts = parts.filter(part =>
+    part.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    part.code.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    part.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+  
   const getStockIcon = (status: string) => {
     switch (status) {
-      case "Em Estoque":
+      case "in_stock":
         return <Package className="w-4 h-4 text-success" />;
-      case "Baixo Estoque":
+      case "low_stock":
         return <AlertTriangle className="w-4 h-4 text-warning" />;
-      case "Sem Estoque":
+      case "out_of_stock":
         return <AlertTriangle className="w-4 h-4 text-destructive" />;
       default:
         return <Package className="w-4 h-4 text-muted-foreground" />;
     }
+  };
+
+  const getStatusLabel = (part: any) => {
+    if (part.quantity <= 0) return "Sem Estoque";
+    if (part.quantity <= part.min_stock || part.status === 'low_stock') return "Baixo Estoque";
+    return "Em Estoque";
   };
 
   return (
@@ -59,6 +79,8 @@ export default function Parts() {
                 <Input 
                   placeholder="Buscar peças..." 
                   className="pl-10"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
                 />
               </div>
               <Button variant="outline">Categorias</Button>
@@ -70,73 +92,120 @@ export default function Parts() {
 
         {/* Parts Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockParts.map((part) => (
-            <Card key={part.id} className="shadow-card hover:shadow-elevated transition-all duration-300">
-              <CardHeader className="pb-3">
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-primary/10">
-                      {getStockIcon(part.status)}
+          {loading ? (
+            // Loading skeletons
+            Array.from({ length: 6 }).map((_, i) => (
+              <Card key={i} className="shadow-card">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <Skeleton className="w-10 h-10 rounded-lg" />
+                      <div>
+                        <Skeleton className="h-6 w-32 mb-2" />
+                        <Skeleton className="h-4 w-20" />
+                      </div>
                     </div>
-                    <div>
-                      <CardTitle className="text-lg">{part.name}</CardTitle>
-                      <p className="text-sm text-muted-foreground">{part.code}</p>
+                    <Skeleton className="h-6 w-20" />
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    {Array.from({ length: 5 }).map((_, j) => (
+                      <div key={j} className="flex items-center justify-between">
+                        <Skeleton className="h-4 w-20" />
+                        <Skeleton className="h-4 w-16" />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex gap-2 pt-2">
+                    <Skeleton className="h-8 flex-1" />
+                    <Skeleton className="h-8 w-8" />
+                  </div>
+                </CardContent>
+              </Card>
+            ))
+          ) : (
+            filteredParts.map((part) => (
+              <Card key={part.id} className="shadow-card hover:shadow-elevated transition-all duration-300">
+                <CardHeader className="pb-3">
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="p-2 rounded-lg bg-primary/10">
+                        {getStockIcon(part.status)}
+                      </div>
+                      <div>
+                        <CardTitle className="text-lg">{part.name}</CardTitle>
+                        <p className="text-sm text-muted-foreground">{part.code}</p>
+                      </div>
                     </div>
+                    <StatusBadge status={getStatusLabel(part)} type="part" />
                   </div>
-                  <StatusBadge status={part.status} type="part" />
-                </div>
-              </CardHeader>
-              
-              <CardContent className="space-y-4">
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Categoria:</span>
-                    <span className="text-sm font-medium">{part.category}</span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm text-muted-foreground">Quantidade:</span>
-                    <span className="text-sm font-medium">{part.quantity} un</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-sm">
-                    <MapPin className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Local:</span>
-                    <span className="font-medium text-xs">{part.location}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-sm">
-                    <ShoppingCart className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Fornecedor:</span>
-                    <span className="font-medium text-xs">{part.supplier}</span>
-                  </div>
-                  
-                  <div className="flex items-center gap-2 text-sm">
-                    <DollarSign className="w-4 h-4 text-muted-foreground" />
-                    <span className="text-muted-foreground">Preço:</span>
-                    <span className="font-medium">R$ {part.unitPrice.toFixed(2)}</span>
+                </CardHeader>
+                
+                <CardContent className="space-y-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Categoria:</span>
+                      <span className="text-sm font-medium">{part.category}</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-muted-foreground">Quantidade:</span>
+                      <span className="text-sm font-medium">{part.quantity} un</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 text-sm">
+                      <MapPin className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Local:</span>
+                      <span className="font-medium text-xs">{part.location || "N/A"}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 text-sm">
+                      <ShoppingCart className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Fornecedor:</span>
+                      <span className="font-medium text-xs">{part.supplier || "N/A"}</span>
+                    </div>
+                    
+                    <div className="flex items-center gap-2 text-sm">
+                      <DollarSign className="w-4 h-4 text-muted-foreground" />
+                      <span className="text-muted-foreground">Preço:</span>
+                      <span className="font-medium">R$ {part.unit_price ? Number(part.unit_price).toFixed(2) : "0,00"}</span>
+                    </div>
+
+                    <div className="pt-2 border-t border-border">
+                      <div className="flex justify-between text-xs">
+                        <span className="text-muted-foreground">Estoque Mín:</span>
+                        <span className="font-medium">{part.min_stock} un</span>
+                      </div>
+                    </div>
                   </div>
 
-                  <div className="pt-2 border-t border-border">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">Estoque Mín:</span>
-                      <span className="font-medium">{part.minimumStock} un</span>
-                    </div>
+                  <div className="flex gap-2 pt-2">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={() => {
+                        setSelectedPart(part);
+                        setShowEditModal(true);
+                      }}
+                    >
+                      <Edit className="w-4 h-4" />
+                      Editar
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="text-destructive hover:text-destructive"
+                      onClick={() => deletePart(part.id)}
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
                   </div>
-                </div>
-
-                <div className="flex gap-2 pt-2">
-                  <Button variant="outline" size="sm" className="flex-1">
-                    <Edit className="w-4 h-4" />
-                    Editar
-                  </Button>
-                  <Button variant="outline" size="sm" className="text-destructive hover:text-destructive">
-                    <Trash2 className="w-4 h-4" />
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                </CardContent>
+              </Card>
+            ))
+          )}
         </div>
 
         {/* Add New Part Card */}
@@ -157,7 +226,20 @@ export default function Parts() {
           </CardContent>
         </Card>
 
-        <NewPartModal open={showPartModal} onOpenChange={setShowPartModal} />
+        <NewPartModal 
+          open={showPartModal} 
+          onOpenChange={setShowPartModal}
+        />
+        
+        <EditPartModal
+          open={showEditModal}
+          onOpenChange={(open) => {
+            setShowEditModal(open);
+            if (!open) setSelectedPart(null);
+          }}
+          part={selectedPart}
+          onSave={() => {}}
+        />
       </div>
     </Layout>
   );
